@@ -84,6 +84,7 @@ class Rates extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $output->writeln('Fetching currencies from API and storing them in DB');
         $currencyRatesToParam = strtoupper($input->getOption('to'));
 
         if ($currencyRatesToParam == 'ALL') {
@@ -106,10 +107,18 @@ class Rates extends Command
             ->getManager();
 
         foreach ($currencyRatesTo as $currencyTo) {
+            $currencyToRate = $rates[self::CURRENCY_FROM . $currencyTo];
+
+            $output->writeln(sprintf(
+                'Currency pair %s and %s has rate: %s',
+                self::CURRENCY_FROM,
+                $currencyTo,
+                $currencyToRate
+            ));
             $currencyRate = new CurrencyRate();
             $currencyRate->setCurrencyFrom(self::CURRENCY_FROM);
             $currencyRate->setCurrencyTo($currencyTo);
-            $currencyRate->setRate($rates[self::CURRENCY_FROM . $currencyTo]);
+            $currencyRate->setRate($currencyToRate);
             $currencyRate->setCreatedAt(new \DateTime('now'));
 
             $entityManager->persist($currencyRate);

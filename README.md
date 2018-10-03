@@ -25,17 +25,23 @@ Configure your project environment:
 You can create database manually or run a command:
 
     ./bin/console doctrine:database:create
-    
+
 To get a proper DB structure run migration script:
 
     ./bin/console doctrine:migrations:migrate
+
+### Testing
+
+Application use phpunit test framework that could be simply runned by command:
+
+    ./bin/phpunit
 
 ### Usage
 
 To fetch data from API and save it in databases run command:
 
     ./bin/console currency:get-rates
-    
+
 If you have question of possible arguments then run next command to get manuel:
 
     ./bin/console currency:get-rates

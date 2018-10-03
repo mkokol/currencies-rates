@@ -14,7 +14,8 @@
     },
     "require-dev": {
         "symfony/dotenv": "*",
-        "symfony/maker-bundle": "^1.7"
+        "symfony/maker-bundle": "^1.7",
+        "symfony/phpunit-bridge": "*"
     },
     "config": {
         "preferred-install": {
