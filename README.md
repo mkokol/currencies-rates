@@ -11,6 +11,7 @@ These instructions will get you a copy of the project up and running on your loc
 * PHP 7.1
 * MySql 5.7
 * Account at [Currency Layer](https://currencylayer.com)
+* npm
 
 ### Installing
 
@@ -22,6 +23,11 @@ Configure your project environment:
     Set correct data to CURRENCY_LAYER_ACCESS_KEY and DATABASE_URL in ".env" file
     Configure other properties in ".env", depends on you preferences
 
+Install dependencies with composer and npm:
+ 
+    composer install
+    npm install
+
 You can create database manually or run a command:
 
     ./bin/console doctrine:database:create
@@ -29,6 +35,10 @@ You can create database manually or run a command:
 To get a proper DB structure run migration script:
 
     ./bin/console doctrine:migrations:migrate
+
+Prepare css and js:
+
+    npm run build
 
 ### Testing
 
@@ -45,3 +55,7 @@ To fetch data from API and save it in databases run command:
 If you have question of possible arguments then run next command to get manuel:
 
     ./bin/console currency:get-rates
+
+run web server with UI interface access:
+
+    php -S 127.0.0.1:8888 -t public

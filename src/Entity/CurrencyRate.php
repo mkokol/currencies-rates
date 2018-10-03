@@ -94,4 +94,15 @@ class CurrencyRate
 
         return $this;
     }
+
+    public function toArray()
+    {
+        return [
+            'id'           => $this->getId(),
+            'currencyFrom' => $this->getCurrencyFrom(),
+            'currencyTo'   => $this->getCurrencyTo(),
+            'rate'         => $this->getRate(),
+            'createdAt'    => $this->getCreatedAt(),
+        ];
+    }
 }

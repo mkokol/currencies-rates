@@ -19,32 +19,30 @@ class CurrencyRateRepository extends ServiceEntityRepository
         parent::__construct($registry, CurrencyRate::class);
     }
 
-//    /**
-//     * @return CurrencyRate[] Returns an array of CurrencyRate objects
-//     */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @param $sortBy
+     * @param $sortOrder
+     * @return CurrencyRate[] Returns an array of CurrencyRate objects
+     * @throws \Exception
+     */
+    public function findAllSortedByField($sortBy, $sortOrder)
     {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        if (
+            !in_array($sortBy, ['id', 'currency_from', 'currency_to', 'rate'])
+            || !in_array($sortOrder, ['asc', 'desc'])
+        ) {
+            throw new \Exception(sprintf(
+                'Parameters sortBy:%s and sortOrder:%s are not supported',
+                $sortBy,
+                $sortOrder
+            ));
+        }
 
-    /*
-    public function findOneBySomeField($value): ?CurrencyRate
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $query = $this->createQueryBuilder('c_r')
+            ->orderBy('c_r.' . $sortBy, $sortOrder)
+            ->setMaxResults(10)
+            ->getQuery();
+
+        return $query->getResult();
     }
-    */
 }
